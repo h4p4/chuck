@@ -34,9 +34,9 @@ namespace Chuck
         async void LoadJokesDGridAsync() 
         {
             Rootobject? rootobject = await Api.GetJokesAsync(SearchJokeTBox.Text);
-            foreach (var item in rootobject.result)
-                Results.Add(item);
-            JokesDGrid.ItemsSource = Results;
+            //foreach (var item in rootobject.result)
+            //    Results.Add(item);
+            JokesDGrid.ItemsSource = rootobject.result;
         }
         private void SearchJokeBtn_Click(object sender, RoutedEventArgs e)
         {

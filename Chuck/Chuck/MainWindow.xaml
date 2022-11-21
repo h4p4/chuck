@@ -8,28 +8,40 @@
         Title="MainWindow" Height="450" Width="800"
         FontSize="25">
     <Grid Background="Lavender">
-        <StackPanel>
-            <StackPanel Orientation="Horizontal">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" MinHeight="40"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Orientation="Horizontal">
                 <TextBox Name="SearchJokeTBox" MinWidth="250"></TextBox>
                 <Button  Name="SearchJokeBtn" Click="SearchJokeBtn_Click">Search</Button>
             </StackPanel>
-            <DataGrid Name="JokesDGrid" 
+            <Grid Grid.Row="1">
+                <DataGrid Name="JokesDGrid" 
                       ColumnWidth="*" MinRowHeight="40" 
                       AutoGenerateColumns="False" IsReadOnly="True"
                       CanUserResizeColumns="False" CanUserResizeRows="False"
                       CanUserReorderColumns="False" HorizontalScrollBarVisibility="Disabled"
-                      HeadersVisibility="Column" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Date" Binding="{Binding created_at}" Width="auto"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Joke" Binding="{Binding value}">
-                        <DataGridTextColumn.ElementStyle>
-                            <Style>
-                                <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
-                            </Style>
-                        </DataGridTextColumn.ElementStyle>
-                    </DataGridTextColumn>
-                </DataGrid.Columns>
-            </DataGrid>
-        </StackPanel>
+                      HeadersVisibility="Column" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray"
+                      >
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Date" Binding="{Binding created_at}" Width="auto">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style>
+                                    <Setter Property="TextBlock.Padding" Value="10"/>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Joke" Binding="{Binding value}">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style>
+                                    <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                                    <Setter Property="TextBlock.Padding" Value="10"/>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
     </Grid>
 </Window>
