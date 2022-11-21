@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -21,14 +22,25 @@ namespace Chuck
     /// </summary>
     public partial class MainWindow : Window
     {
+        ApiProvider Api { get; }
+        List<Result> Results { get; set; }
         public MainWindow()
         {
             InitializeComponent();  
-            ApiProvider api = new ApiProvider();
-            Task<Rootobject> rootobject = api.GetJokes();
-            jokesDGrid.ItemsSource = rootobject;
-            //foreach (var res in rootobject.Result.result)
-               // Console.WriteLine(res.value + "\n" + res.created_at + "\n\n");
+            DataContext = this;
+            Results = new List<Result>();
+            Api = new ApiProvider();
+        }
+        async void LoadJokesDGridAsync() 
+        {
+            Rootobject? rootobject = await Api.GetJokesAsync(SearchJokeTBox.Text);
+            foreach (var item in rootobject.result)
+                Results.Add(item);
+            JokesDGrid.ItemsSource = Results;
+        }
+        private void SearchJokeBtn_Click(object sender, RoutedEventArgs e)
+        {
+            LoadJokesDGridAsync();
         }
     }
 }

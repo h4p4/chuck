@@ -5,14 +5,31 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Chuck"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800"
+        FontSize="25">
     <Grid Background="Lavender">
-        <DataGrid x:Name="jokesDGrid" AutoGenerateColumns="True">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Модель" Binding="{Binding Path=Result.}" Width="90" />
-                <DataGridHyperlinkColumn Header="Компания" Binding="{Binding Path=Company}" Width="80" />
-                <DataGridTextColumn Header="Цена" Binding="{Binding Path=Price}" Width="50" />
-            </DataGrid.Columns>
-        </DataGrid>
+        <StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBox Name="SearchJokeTBox" MinWidth="250"></TextBox>
+                <Button  Name="SearchJokeBtn" Click="SearchJokeBtn_Click">Search</Button>
+            </StackPanel>
+            <DataGrid Name="JokesDGrid" 
+                      ColumnWidth="*" MinRowHeight="40" 
+                      AutoGenerateColumns="False" IsReadOnly="True"
+                      CanUserResizeColumns="False" CanUserResizeRows="False"
+                      CanUserReorderColumns="False" HorizontalScrollBarVisibility="Disabled"
+                      HeadersVisibility="Column" HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Date" Binding="{Binding created_at}" Width="auto"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Joke" Binding="{Binding value}">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style>
+                                <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
     </Grid>
 </Window>

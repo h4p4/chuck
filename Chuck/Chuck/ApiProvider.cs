@@ -10,10 +10,14 @@ namespace Chuck
 {
     public class ApiProvider
     {
-        public async Task<Rootobject> GetJokes() 
+        HttpClient httpClient;
+        public ApiProvider() 
         {
-            HttpClient httpClient = new HttpClient();
-            string request = "https://api.chucknorris.io/jokes/search?query=hitler";
+            httpClient = new HttpClient();
+        }
+        public async Task<Rootobject> GetJokesAsync(string query) 
+        {
+            string request = $"https://api.chucknorris.io/jokes/search?query={query}";
             HttpResponseMessage response =
                 (await httpClient.GetAsync(request)).EnsureSuccessStatusCode();
             string responseBody = await response.Content.ReadAsStringAsync();

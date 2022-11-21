@@ -9,6 +9,6 @@ namespace Chuck
     public class Rootobject
     {
         public int total { get; set; }
-        public Result[] result { get; set; }
+        public List<Result> result { get; set; }
     }
 }
